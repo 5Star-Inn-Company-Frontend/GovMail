@@ -9,6 +9,7 @@ class MessagesPage extends StatefulWidget {
 }
 
 class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderStateMixin{
+  bool messagesUnopened = false;
 
   int _selectedTab = 0;
 
@@ -128,6 +129,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
     // =======================Unread Messages Section======================
     Flexible(
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: 10,
         itemBuilder: (BuildContext context,  index) {
           return Container(
@@ -263,7 +265,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(pageTitle[_selectedTab], style: TextStyle(fontSize: 25),),
+        title: Text(pageTitle[_selectedTab], style: const TextStyle(fontSize: 25),),
         centerTitle: true,
         actions: const [
           CircleAvatar(
@@ -281,11 +283,81 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
         unselectedLabelColor: Colors.grey,
         labelColor: const Color.fromARGB(255, 32, 133, 36),
         onTap: (index) {_changeTab(index);},
-        tabs: const [
-          Tab(icon: Icon(Icons.message), text: 'All Messages'),
-          Tab(icon: Icon(Icons.mark_email_read), text: 'Read Messages'),
-          Tab(icon: Icon(Icons.mark_email_unread), text: 'Unread Messages',),
-          Tab(icon: Icon(Icons.circle), text: 'Circular'),
+        tabs: [
+          Tab(
+            icon: messagesUnopened != false ? const Icon(Icons.message) : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.message),
+                Container(
+                  width: 30,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: const Center(child: Text('12+', style: TextStyle(color: Colors.white),)),
+                )
+              ],
+            ), 
+            text: 'All Messages'
+          ),
+          
+          Tab(
+            icon: messagesUnopened != false ? const Icon(Icons.message) : Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.mark_email_read),
+                Container(
+                  width: 30,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: const Center(child: Text('12+', style: TextStyle(color: Colors.white),)),
+                )
+              ],
+            ), 
+            text: 'Read Messages'
+          ),
+
+          Tab(
+            icon: messagesUnopened != false ? const Icon(Icons.message) : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.mark_email_unread),
+                Container(
+                  width: 30,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: const Center(child: Text('12+', style: TextStyle(color: Colors.white),)),
+                )
+              ],
+            ), 
+            text: 'Unread Messages'
+          ),
+
+          Tab(
+            icon: messagesUnopened != false ? const Icon(Icons.message) : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.circle),
+                Container(
+                  width: 30,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: const Center(child: Text('12+', style: TextStyle(color: Colors.white),)),
+                )
+              ],
+            ), 
+            text: 'Circular'
+          ),
         ],
       ),
 
