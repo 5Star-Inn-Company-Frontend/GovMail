@@ -54,7 +54,7 @@ class _AllMessagesTabState extends State<AllMessagesTab> {
                       color: Colors.green,
                       child: const Text(
                         '1 new',
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                        style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
                   ),
