@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:govmail/pages/compose_message_page.dart';
 import 'package:govmail/pages/messages_page.dart';
 
 void main() {
@@ -15,6 +16,7 @@ class GovMailApp extends StatelessWidget {
       title: 'GovMail App',
       debugShowCheckedModeBanner: false,
       home: MessagesPage(),
+      // home: ComposeMessagePage()
     );
   }
 }
