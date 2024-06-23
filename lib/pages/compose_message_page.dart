@@ -14,7 +14,7 @@ class _ComposeMessagePageState extends State<ComposeMessagePage> {
       appBar: AppBar(
         title: const Text('Compose Message', style: TextStyle(color: Colors.black, fontSize: 25),),
         centerTitle: true,
-        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_rounded)),
+        leading: IconButton(onPressed: () {Navigator.pop(context);}, icon: const Icon(Icons.arrow_back_rounded)),
       ),
 
       body: Padding(padding: const EdgeInsets.all(8), 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:govmail/pages/compose_message_page.dart';
+import 'package:govmail/pages/sentmessages_page.dart';
 import 'package:govmail/pages/tabs/allmessages.dart';
 import 'package:govmail/pages/tabs/circularmessages.dart';
 import 'package:govmail/pages/tabs/readmessages.dart';
@@ -36,8 +39,6 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
     });
   }
 
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -97,46 +98,146 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
 
 
   composeMessageDialog(){
-    // showGeneralDialog(
-    //   context: context, 
-    //   barrierDismissible: false,
-    //   barrierColor: Colors.transparent,
-    //   transitionDuration: const Duration(milliseconds: 400),
-    //   pageBuilder: (context, animation, secondaryAnimation) {
-    //     return composeMessageDialog();
-    //   }
-    // );
-
-
     showGeneralDialog(
       context: context,
-      // barrierDismissible: true,
+      barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.transparent,
-      transitionDuration: const Duration(milliseconds: 200),
+      // barrierColor: Colors.black.withOpacity(0.4),
+      transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
-        return Center(
-          child: Container(
+        return Scaffold(
+          backgroundColor: Colors.black.withOpacity(0.6),
+          body: Align(
             alignment: Alignment.bottomCenter,
-            width: double.infinity,
-            height: 500,
-            padding: const EdgeInsets.all(20),
-            color: Colors.green,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'This is a General Dialog',
-                  style: TextStyle(fontSize: 24),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Close'),
-                ),
-              ],
+            child: Container(
+              height: 500,
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Compose Message', style: TextStyle(color: Colors.black, fontSize: 25),),
+                      IconButton(
+                        onPressed: (){Navigator.pop(context);},
+                          icon: const Icon(Icons.cancel_outlined, size: 35)
+                      )
+                    ],
+                  ),
+          
+                  const SizedBox(height: 35),
+          
+                  SizedBox(
+                    height: 350,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+          
+                        GestureDetector(
+                          // behavior: HitTestBehavior.translucent, 
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ComposeMessagePage()
+                              )
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row( 
+                                children: [
+                                  Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.green),
+                                      borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: const Center(child: Icon(Icons.send, color: Colors.green, size: 30)),
+                                  ),
+                          
+                                  const SizedBox(width: 20,),
+                          
+                                  const Text('Message', style: TextStyle(color: Colors.black, fontSize: 17)),
+                                ],
+                              ),
+                              
+                          
+                              const Icon((Icons.arrow_forward_ios_rounded))
+                              
+                            ],
+                          ),
+                        ),
+                    
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.yellow),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: const Center(child: Icon(Icons.people, color: Colors.yellow, size: 30)),
+                                ),
+                        
+                                const SizedBox(width: 20,),
+                        
+                                const Text('Circular', style: TextStyle(color: Colors.black, fontSize: 17)),
+                              ],
+                            ),
+                            
+                        
+                            const Icon((Icons.arrow_forward_ios_rounded))
+                            
+                          ],
+                        ),
+                    
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.orange),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: const Center(child: Icon(Icons.broadcast_on_home, color: Colors.orange, size: 30)),
+                                ),
+                        
+                                const SizedBox(width: 20,),
+                        
+                                const Text('Broadcast', style: TextStyle(color: Colors.black, fontSize: 17)),
+                              ],
+                            ),
+                            
+                        
+                            const Icon((Icons.arrow_forward_ios_rounded))
+                            
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+          
+              
+                ],
+              ),
             ),
           ),
         );
